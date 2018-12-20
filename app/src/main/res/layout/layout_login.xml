@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mapbar.scale.ScaleRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/home_main"
+    android:orientation="vertical">
+
+    <com.mapbar.scale.ScaleLinearLayout
+        android:id="@+id/logoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="@mipmap/loginbj"
+        android:gravity="center">
+
+        <com.mapbar.scale.ScaleImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/newlogo" />
+    </com.mapbar.scale.ScaleLinearLayout>
+
+    <com.mapbar.scale.ScaleRelativeLayout
+        android:id="@+id/userNameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logoLayout"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="80dp">
+
+        <com.mapbar.scale.ScaleImageView
+            android:id="@+id/usernameIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/data" />
+
+        <com.mapbar.scale.ScaleEditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="19dp"
+            android:layout_toRightOf="@id/usernameIcon"
+            android:background="@android:color/transparent"
+            android:hint="请输入用户名"
+            android:textColor="@android:color/black"
+            android:textSize="23dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/username"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="13dp"
+            android:layout_toRightOf="@id/usernameIcon"
+            android:background="#BDBDBD" />
+
+    </com.mapbar.scale.ScaleRelativeLayout>
+
+    <com.mapbar.scale.ScaleRelativeLayout
+        android:id="@+id/pwdLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/userNameLayout"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="44dp">
+
+        <com.mapbar.scale.ScaleImageView
+            android:id="@+id/pwdIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/account" />
+
+        <com.mapbar.scale.ScaleEditText
+            android:id="@+id/pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="19dp"
+            android:layout_toRightOf="@id/pwdIcon"
+            android:inputType="textPassword"
+            android:background="@android:color/transparent"
+            android:hint="密码"
+            android:textColor="@android:color/black"
+            android:textSize="23dp" />
+        <com.mapbar.scale.ScaleImageView
+            android:id="@+id/pwdEyeIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/eye_style" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/pwdIcon"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="13dp"
+            android:layout_toRightOf="@id/pwdIcon"
+            android:background="#BDBDBD" />
+
+    </com.mapbar.scale.ScaleRelativeLayout>
+
+    <com.mapbar.scale.ScaleButton
+        android:id="@+id/commit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pwdLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:background="@mipmap/commiticon"
+        android:gravity="center"
+        android:text="登陆"
+        android:textColor="#ffffff"
+        android:textSize="25dp" />
+    <com.mapbar.scale.ScaleEditText
+        android:id="@+id/baseUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="19dp"
+        android:layout_toRightOf="@id/pwdIcon"
+        android:inputType="textPassword"
+        android:visibility="gone"
+        android:background="@android:color/transparent"
+        android:hint="密码"
+        android:textColor="@android:color/black"
+        android:textSize="23dp" />
+
+</com.mapbar.scale.ScaleRelativeLayout>
