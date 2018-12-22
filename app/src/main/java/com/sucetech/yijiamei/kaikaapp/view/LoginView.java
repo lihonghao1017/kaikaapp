@@ -4,15 +4,28 @@ import android.content.Context;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.mapbar.scale.ScaleLinearLayout;
 import com.sucetech.yijiamei.kaikaapp.Configs;
+import com.sucetech.yijiamei.kaikaapp.MainActivity;
 import com.sucetech.yijiamei.kaikaapp.R;
 import com.sucetech.yijiamei.kaikaapp.UserMsg;
 import com.sucetech.yijiamei.kaikaapp.tool.TaskManager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.MediaType;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 /**
@@ -25,10 +38,12 @@ public class LoginView extends ScaleLinearLayout implements View.OnClickListener
 
     public LoginView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        initView(context);
     }
 
     public LoginView(Context context) {
         super(context);
+        initView(context);
     }
 
 
@@ -49,7 +64,7 @@ public class LoginView extends ScaleLinearLayout implements View.OnClickListener
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.commit) {
-//            ((MainActivity) getContext()).showProgressDailogView("登陆中...");
+            ((MainActivity) getContext()).showProgressDailogView("登陆中...");
             UserMsg.saveUserName(user.getText().toString());
             UserMsg.savePwd(pwd.getText().toString());
             if(baseUrl.getText()!=null&&!baseUrl.getText().toString().equals("")&&baseUrl.getText().toString().contains("http://")){
@@ -58,7 +73,7 @@ public class LoginView extends ScaleLinearLayout implements View.OnClickListener
             TaskManager.getInstance().addTask(new Runnable() {
                 @Override
                 public void run() {
-//                    requestLoing2();
+                    requestLoing2();
                 }
             });
         }else if(v.getId() == R.id.pwdEyeIcon){
@@ -72,61 +87,60 @@ public class LoginView extends ScaleLinearLayout implements View.OnClickListener
     }
 
     private String TAG = "LLL";
-//    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+    private String requestLoing2() {
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("username", UserMsg.getUserName());
+            jsonObject.put("password", UserMsg.getPwd());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(JSON, String.valueOf(jsonObject));
+        Request request = new Request.Builder()
+                .url(Configs.baseUrl+"/api/v1/yijiamei/login")
+                .post(body)
+                .build();
+        try {
+            final Response response = ((MainActivity) getContext()).client.newCall(request).execute();
+            if (response.isSuccessful()) {
+                UserMsg.saveToken(response.header("Authorization"));
+                this.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        ((MainActivity)getContext()).hideProgressDailogView();
+//                        mEventManager.notifyObservers(EventStatus.logined,null);
+                        LoginView.this.setVisibility(View.GONE);
+//                        mEventManager.notifyObservers(EventStatus.logined,null);
+                        Toast.makeText(getContext(),"chengong -->",Toast.LENGTH_LONG);
+                    }
+                });
 //
-//    private String requestLoing2() {
-//
-//        JSONObject jsonObject = new JSONObject();
-//        try {
-//            jsonObject.put("username", UserMsg.getUserName());
-//            jsonObject.put("password", UserMsg.getPwd());
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//        RequestBody body = RequestBody.create(JSON, String.valueOf(jsonObject));
-//        Request request = new Request.Builder()
-//                .url(Configs.baseUrl+"/api/v1/yijiamei/login")
-//                .post(body)
-//                .build();
-//        try {
-//            final Response response = ((MainActivity) getContext()).client.newCall(request).execute();
-//            if (response.isSuccessful()) {
-//                UserMsg.saveToken(response.header("Authorization"));
-//                requestYiyuan();
-////                this.post(new Runnable() {
-////                    @Override
-////                    public void run() {
-////                        ((MainActivity)getContext()).hideProgressDailogView();
-////                        mEventManager.notifyObservers(EventStatus.logined,null);
-////                        LoginView.this.setVisibility(View.GONE);
-//////                        mEventManager.notifyObservers(EventStatus.logined,null);
-////                        Toast.makeText(getContext(),"chengong -->",Toast.LENGTH_LONG);
-////                    }
-////                });
-////
-//                return response.body().string();
-//            } else {
-//                Log.e("LLL", "shibai--->");
-//
-//                loginFail();
-////                Toast.makeText(getContext(),"shibai -->"+response.message(),Toast.LENGTH_LONG);
-//                throw new IOException("Unexpected code " + response);
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            loginFail();
-//        }
-//        return null;
-//    }
-//    private void loginFail(){
-//        this.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                ((MainActivity) getContext()).hideProgressDailogView();
-//                Toast.makeText(getContext(), "登陆失败，请检查用户名或密码", Toast.LENGTH_LONG).show();
-//            }
-//        });
-//    }
+                return response.body().string();
+            } else {
+                Log.e("LLL", "shibai--->");
+
+                loginFail();
+//                Toast.makeText(getContext(),"shibai -->"+response.message(),Toast.LENGTH_LONG);
+                throw new IOException("Unexpected code " + response);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            loginFail();
+        }
+        return null;
+    }
+    private void loginFail(){
+        this.post(new Runnable() {
+            @Override
+            public void run() {
+                ((MainActivity) getContext()).hideProgressDailogView();
+                Toast.makeText(getContext(), "登陆失败，请检查用户名或密码", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 //
 //    private void requestYiyuan() {
 //

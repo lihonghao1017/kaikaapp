@@ -13,6 +13,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        UserMsg.initUserMsg(this);
         ScaleCalculator.init(this, 0, 2199, 1080, 2f);
 //       UserMsg.initUserMsg(this);
 //        locationService = new LocationService(getApplicationContext());

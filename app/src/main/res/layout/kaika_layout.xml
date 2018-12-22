@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.mapbar.scale.ScaleRelativeLayout
+        android:id="@+id/titleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/baseColor">
+
+        <com.mapbar.scale.ScaleTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="开卡系统"
+            android:textColor="@android:color/white"
+            android:textSize="30dp" />
+
+    </com.mapbar.scale.ScaleRelativeLayout>
+
+    <com.mapbar.scale.ScaleLinearLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
+        android:layout_below="@id/titleLayout"
+        android:background="#f0f0f0"
+        android:orientation="horizontal">
+
+        <com.mapbar.scale.ScaleRelativeLayout
+            android:id="@+id/tabLayout01"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <com.mapbar.scale.ScaleTextView
+                android:id="@+id/chenzhong"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="开卡"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp" />
+
+            <View
+                android:id="@+id/tabCursor01"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@android:color/holo_blue_light" />
+        </com.mapbar.scale.ScaleRelativeLayout>
+
+        <com.mapbar.scale.ScaleRelativeLayout
+            android:id="@+id/tabLayout02"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <com.mapbar.scale.ScaleTextView
+                android:id="@+id/chenzhong2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="补卡"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp" />
+
+            <View
+                android:id="@+id/tabCursor02"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@android:color/holo_blue_light"
+                android:visibility="gone" />
+        </com.mapbar.scale.ScaleRelativeLayout>
+    </com.mapbar.scale.ScaleLinearLayout>
+
+    <com.mapbar.scale.ScaleLinearLayout
+        android:id="@+id/userMsgLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tabLayout"
+        android:orientation="vertical">
+
+        <com.mapbar.scale.ScaleLinearLayout
+            android:id="@+id/nameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal">
+            <com.mapbar.scale.ScaleTextView
+                android:id="@+id/nameStr"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="22dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginRight="10dp"
+                android:text="姓名"/>
+            <com.mapbar.scale.ScaleEditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:textSize="22dp"
+                android:gravity="center_vertical"
+                android:textColor="@android:color/black"
+                android:hint="请输入姓名"
+                />
+        </com.mapbar.scale.ScaleLinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/baseColor"/>
+        <com.mapbar.scale.ScaleLinearLayout
+            android:id="@+id/phoneLayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal">
+            <com.mapbar.scale.ScaleTextView
+                android:id="@+id/phoneStr"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="22dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginRight="10dp"
+                android:text="电话"/>
+            <com.mapbar.scale.ScaleEditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:textSize="22dp"
+                android:gravity="center_vertical"
+                android:textColor="@android:color/black"
+                android:hint="请输入电话号码"
+                />
+        </com.mapbar.scale.ScaleLinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/baseColor"/>
+        <com.mapbar.scale.ScaleLinearLayout
+            android:id="@+id/adressLayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal">
+            <com.mapbar.scale.ScaleTextView
+                android:id="@+id/addStr"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="22dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginRight="10dp"
+                android:text="地址"/>
+            <com.mapbar.scale.ScaleEditText
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:textSize="22dp"
+                android:gravity="center_vertical"
+                android:textColor="@android:color/black"
+                android:hint="请输入楼号地址"
+                />
+
+        </com.mapbar.scale.ScaleLinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/baseColor"/>
+        <com.mapbar.scale.ScaleTextView
+            android:id="@+id/commit"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="60dp"
+            android:background="@color/baseColor"
+            android:textSize="22dp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:hint="写入IC卡"
+            />
+    </com.mapbar.scale.ScaleLinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mapbar.scale.ScaleRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     >
+
+    <com.mapbar.scale.ScaleLinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/navi_toast_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="15dp"
+        android:paddingLeft="22dp"
+        android:paddingRight="22dp"
+        android:paddingTop="15dp" >
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:indeterminateBehavior="repeat"
+            android:indeterminateDrawable="@drawable/navi_bg_progress_bar"
+            android:indeterminateOnly="true" />
+
+        <com.mapbar.scale.ScaleTextView
+            android:id="@+id/dialog_content_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="加载中..."
+            android:textColor="@android:color/white"
+            android:textSize="28dp" />
+    </com.mapbar.scale.ScaleLinearLayout>
+
+</com.mapbar.scale.ScaleRelativeLayout>

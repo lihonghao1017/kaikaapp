@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mapbar.scale.ScaleRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/boluthListLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.4"
+        android:background="#000000" />
+
+    <com.mapbar.scale.ScaleLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="100dp"
+        android:paddingBottom="100dp">
+
+        <com.mapbar.scale.ScaleLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.mapbar.scale.ScaleImageView
+                android:id="@+id/img01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/cai01" />
+
+            <com.mapbar.scale.ScaleImageView
+                android:id="@+id/img02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-60dp"
+                android:src="@mipmap/car02" />
+        </com.mapbar.scale.ScaleLinearLayout>
+        <com.mapbar.scale.ScaleTextView
+            android:id="@+id/bluthtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="请将IC卡靠近手机"
+            android:textColor="#C3C3C3"
+            android:textSize="26dp" />
+    </com.mapbar.scale.ScaleLinearLayout>
+</com.mapbar.scale.ScaleRelativeLayout>
