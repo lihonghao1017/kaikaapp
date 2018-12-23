@@ -12,6 +12,7 @@ import com.mapbar.scale.ScaleLinearLayout;
 import com.sucetech.yijiamei.kaikaapp.Configs;
 import com.sucetech.yijiamei.kaikaapp.MainActivity;
 import com.sucetech.yijiamei.kaikaapp.R;
+import com.sucetech.yijiamei.kaikaapp.bean.BukaBean;
 import com.sucetech.yijiamei.kaikaapp.tool.TaskManager;
 
 import org.json.JSONException;
@@ -28,26 +29,31 @@ public class KaikaView extends ScaleLinearLayout implements View.OnClickListener
     private TextView commit, address, phone, name;
     public String kaId;
     private XieKaDailog xieKaDailog;
-    public void setKaikaiId(String kaId){
+    private View tab01,tab02,tabCursor01,tabCursor02;
+    private boolean isKaika=true;
+    private BukaView bukaView;
+
+    public void setKaikaiId(final String kaId){
         this.kaId=kaId;
-        send();
+        if (isKaika){
+            send();
+        }else{
+            xieKaDailog.setStuta(1);
+            TaskManager.getInstance().addTask(new Runnable() {
+                @Override
+                public void run() {
+                    requestLoing3(kaId,bukaBean.residentId);
+                }
+            });
+
+        }
+
     }
     public String getName(){
         return name.getText().toString();
     }
     public String getPhone(){
         return phone.getText().toString();
-    }
-
-    public KaikaView(Context context) {
-        super(context);
-        View v = LayoutInflater.from(context).inflate(R.layout.kaika_layout, null);
-        commit = v.findViewById(R.id.commit);
-        address = v.findViewById(R.id.address);
-        phone = v.findViewById(R.id.phone);
-        name = v.findViewById(R.id.name);
-        commit.setOnClickListener(this);
-        this.addView(v,-1,-1);
     }
 
     public KaikaView(Context context, AttributeSet attrs) {
@@ -59,6 +65,14 @@ public class KaikaView extends ScaleLinearLayout implements View.OnClickListener
         name = v.findViewById(R.id.name);
         commit.setOnClickListener(this);
         this.addView(v,-1,-1);
+        tab01=v.findViewById(R.id.tabLayout01);
+        tab02=v.findViewById(R.id.tabLayout02);
+        tab01.setOnClickListener(this);
+        tab02.setOnClickListener(this);
+        tabCursor01 = v.findViewById(R.id.tabCursor01);
+        tabCursor02 = v.findViewById(R.id.tabCursor02);
+        bukaView=v.findViewById(R.id.bukaView);
+        bukaView.setkaiCards(this);
     }
 
     @Override
@@ -76,6 +90,16 @@ public class KaikaView extends ScaleLinearLayout implements View.OnClickListener
             xieKaDailog=new XieKaDailog(getContext());
             xieKaDailog.show();
 
+        }else if(v.getId() == R.id.tabLayout01){
+            tabCursor01.setVisibility(View.VISIBLE);
+            tabCursor02.setVisibility(View.GONE);
+            bukaView.setVisibility(View.GONE);
+            isKaika=true;
+        }else if(v.getId() == R.id.tabLayout02){
+            tabCursor01.setVisibility(View.GONE);
+            tabCursor02.setVisibility(View.VISIBLE);
+            bukaView.setVisibility(View.VISIBLE);
+            isKaika=false;
         }
     }
     public boolean isShuaka(){
@@ -147,20 +171,20 @@ public class KaikaView extends ScaleLinearLayout implements View.OnClickListener
         try {
             jsonObject.put("cardNumber", cardNumber);
             jsonObject.put("residentsId", residentsId);
-//            if (a != null && !a.equals(""))
-//                jsonObject.put("address", a);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         RequestBody body = RequestBody.create(JSON, String.valueOf(jsonObject));
+
         Request request = new Request.Builder()
-                .url(Configs.baseUrl + ":8081/datong/v1/residents/card")
+                .url(Configs.baseUrl + ":8081/datong/v1/residents/card?cardNumber="+cardNumber+"&residentsId="+residentsId)
                 .post(body)
                 .build();
         try {
             final Response response = ((MainActivity) getContext()).client.newCall(request).execute();
             if (response.isSuccessful()) {
                 final String ll=response.body().string();
+
                 Log.e("LLL","ll-requestLoing3->"+ll);
                 this.post(new Runnable() {
                     @Override
@@ -180,6 +204,15 @@ public class KaikaView extends ScaleLinearLayout implements View.OnClickListener
             sendError();
         }
         return null;
+    }
+    public BukaBean bukaBean;
+    public void showBukaDailog(BukaBean bukaBean){
+        this.bukaBean=bukaBean;
+        xieKaDailog=new XieKaDailog(getContext());
+        xieKaDailog.show();
+    }
+    public boolean isBukaing(){
+        return isKaika;
     }
     private void sendError(){
         this.post(new Runnable() {

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mapbar.scale.ScaleLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <com.mapbar.scale.ScaleLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp">
+
+        <com.mapbar.scale.ScaleImageView
+            android:id="@+id/searchicon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/searchicon" />
+
+        <com.mapbar.scale.ScaleEditText
+            android:id="@+id/searchview"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginLeft="12dp"
+            android:background="@android:color/white"
+            android:hint="搜索姓名手机号"
+            android:imeOptions="actionSearch"
+            android:maxLines="1"
+            android:inputType="text"
+            android:textColor="@android:color/black"
+            android:textSize="24dp" />
+    </com.mapbar.scale.ScaleLinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/baseColor" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:background="@android:color/white"
+        android:divider="@color/baseColor"
+        android:dividerHeight="1dp"></ListView>
+</com.mapbar.scale.ScaleLinearLayout>

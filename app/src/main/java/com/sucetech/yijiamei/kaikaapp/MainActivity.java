@@ -79,6 +79,10 @@ public class MainActivity extends Activity {
        if (kaikaView.getVisibility()==View.VISIBLE&&kaikaView.isShuaka()){
            String name=kaikaView.getName();
            String phone=kaikaView.getPhone();
+           if (!kaikaView.isBukaing()){
+               name=kaikaView.bukaBean.name;
+               phone=kaikaView.bukaBean.cellphone;
+           }
            if (name==null||name.equals(""))
                return;
            if (phone==null||phone.equals(""))
