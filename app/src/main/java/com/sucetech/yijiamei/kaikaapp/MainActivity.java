@@ -87,7 +87,7 @@ public class MainActivity extends Activity {
                return;
            if (phone==null||phone.equals(""))
                return;
-           writeMsg(tag,name+":"+phone+":"+str);
+//           writeMsg(tag,name+":"+phone+":"+str);
            kaikaView.setKaikaiId(str);
        }
     }

@@ -12,6 +12,7 @@ import com.mapbar.scale.ScaleLinearLayout;
 import com.sucetech.yijiamei.kaikaapp.Configs;
 import com.sucetech.yijiamei.kaikaapp.MainActivity;
 import com.sucetech.yijiamei.kaikaapp.R;
+import com.sucetech.yijiamei.kaikaapp.UserMsg;
 import com.sucetech.yijiamei.kaikaapp.bean.BukaBean;
 import com.sucetech.yijiamei.kaikaapp.tool.TaskManager;
 
@@ -136,6 +137,7 @@ public class KaikaView extends ScaleLinearLayout implements View.OnClickListener
         RequestBody body = RequestBody.create(JSON, String.valueOf(jsonObject));
         Request request = new Request.Builder()
                 .url(Configs.baseUrl + ":8081/datong/v1/residents")
+                .header("Authorization", UserMsg.getToken())
                 .post(body)
                 .build();
         try {
@@ -154,7 +156,7 @@ public class KaikaView extends ScaleLinearLayout implements View.OnClickListener
                 Log.e("LLL","ll-->"+ll);
 //
             } else {
-                Log.e("LLL", "shibai--->");
+                Log.e("LLL", "shibai--->"+response.body().string());
                 sendError();
                 throw new IOException("Unexpected code " + response);
             }
@@ -178,6 +180,7 @@ public class KaikaView extends ScaleLinearLayout implements View.OnClickListener
 
         Request request = new Request.Builder()
                 .url(Configs.baseUrl + ":8081/datong/v1/residents/card?cardNumber="+cardNumber+"&residentsId="+residentsId)
+                .header("Authorization", UserMsg.getToken())
                 .post(body)
                 .build();
         try {
